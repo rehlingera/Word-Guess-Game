@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+}
+
+p, h1, h2, h3, span {
+    font-family: 'Courier New', Courier, monospace;
+    color: green;
+    text-align: center;
+}
+
+.dino {
+    font-family: monospace;
+    font-size: 10px;
+    line-height: 10px;
+}
+
+#head, #torso, #leftArm, #rightArm, #leftThigh, #leftCalf, #rightThigh, #rightCalf {
+    color: black
+}
+
+li {
+    display: inline;
+}
+
+img {
+    width: 100%;
+}
