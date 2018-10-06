@@ -25,3 +25,26 @@ li {
 img {
     width: 100%;
 }
+
+@media only screen and (max-width: 767px) {
+    .dino {
+        font-size: 8px;
+        line-height: 8px;
+    }
+    
+    .dino:hover {
+        display: none;
+    }
+
+    .hangmanArea {
+        font-size: 12px;
+    }
+
+    #wordArea {
+        font-size: 20px;
+    }
+
+    .score {
+        font-size: 20px;
+    }
+}
