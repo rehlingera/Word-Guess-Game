@@ -96,6 +96,9 @@ window.onload = function () {
         document.getElementById("pictureArea").innerHTML = "";
         document.getElementById("factArea").innerHTML = "";
         document.getElementById("winLossArea").innerHTML = "";
+        document.getElementById("pressAny").style.display = "none";
+        document.getElementById("hangmanArea").style.display = "block"
+        document.getElementById("letterArea").style.display = "block";
         var revertLetters = document.getElementsByClassName("letter");
             for (iter = 0; iter < revertLetters.length; iter++) {
             revertLetters[iter].style.color = "green";
@@ -118,12 +121,12 @@ window.onload = function () {
         dinoPic.src = randomDino.picture;
 
         for (var len = 0; len < randomDino.name.length; len++) {
-        var targetWord = document.getElementById("wordArea");
-        var newSpace = document.createElement("li");
-        newSpace.className = randomDino.name.charAt(len);
-        newSpace.id = len;
-        newSpace.textContent = " _ ";
-        targetWord.appendChild(newSpace);
+            var targetWord = document.getElementById("wordArea");
+            var newSpace = document.createElement("li");
+            newSpace.className = randomDino.name.charAt(len);
+            newSpace.id = len;
+            newSpace.textContent = " _ ";
+            targetWord.appendChild(newSpace);
         };
 
         document.onkeyup = function(event) {
@@ -151,41 +154,53 @@ window.onload = function () {
                 document.getElementById("chances").textContent = chances;
                 outcome = "incorrect";
                 if (correctGuesses === randomDino.name.length) {
-                    document.getElementById("winLossArea").textContent = "You Win! (press enter to play again)";
+                    document.getElementById("letterArea").style.display = "none";
+                    document.getElementById("hangmanArea").style.display = "none";
+                    document.getElementById("winLossArea").textContent = "You Win! (press enter or tap here to play again)";
                     document.getElementById("pictureArea").appendChild(dinoPic);
                     document.getElementById("factArea").textContent = randomDino.description;
                     winCount++;
                     usedLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+                    document.getElementById("DinoWin").load();
+                    document.getElementById("DinoIntro").load();
+                    document.getElementById("DinoLoss").load();
+                    document.getElementById("DinoWin").pause();
+                    document.getElementById("DinoIntro").pause();
+                    document.getElementById("DinoLoss").pause();
                     document.getElementById("DinoWin").play();
                     document.onkeyup = function(event) {
                         if (event.keyCode === 13) {
                             runScript();
                         };
                     };
-                    
                 };
+                
                 if (incorrectGuesses === 8) {
-                    document.getElementById("winLossArea").textContent = "You Lose! (press enter to play again)";
+                    document.getElementById("letterArea").style.display = "none";
+                    document.getElementById("hangmanArea").style.display = "none";
+                    document.getElementById("winLossArea").textContent = "You Lose! (press enter or tap here to play again)";
                     lossCount++;
                     usedLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+                    document.getElementById("DinoWin").load();
+                    document.getElementById("DinoIntro").load();
+                    document.getElementById("DinoLoss").load();
+                    document.getElementById("DinoWin").pause();
+                    document.getElementById("DinoIntro").pause();
+                    document.getElementById("DinoLoss").pause();
                     document.getElementById("DinoLoss").play();
                     document.onkeyup = function(event) {
                         if (event.keyCode === 13) {
                             runScript();
                         };
                     };
-                    
                 };
+
                 document.getElementById("wins").textContent = winCount;
                 document.getElementById("losses").textContent = lossCount;
                 usedLetters.push(event.key);
-                
-                return ;
             };
-            return;
         };
-        return;
-        };
+    };
        
     document.onkeyup = function(event) {
             runScript();

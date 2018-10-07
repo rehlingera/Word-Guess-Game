@@ -20,19 +20,23 @@ p, h1, h2, h3, span {
 
 li {
     display: inline;
+    font-size: 25px;
 }
 
 img {
     width: 100%;
 }
 
+#tapHere {
+    display: none;
+}
+
 @media only screen and (max-width: 767px) {
-    .dino {
-        font-size: 8px;
-        line-height: 8px;
+    #tapHere {
+        display: block;
     }
-    
-    .dino:hover {
+
+    #pressAny {
         display: none;
     }
 
@@ -40,11 +44,36 @@ img {
         font-size: 12px;
     }
 
+    #dino {
+        display: none;
+    }
+
     #wordArea {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .score {
         font-size: 20px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p {
+        overflow: hidden;
+    }
+
+    li {
+        display: inline;
+        font-size:16px;
     }
 }
