@@ -84,12 +84,12 @@
 
 window.onload = function () {
 
-    var runScript = function () {
+    var runScript = function() {
 
         var chances = 8;
         var correctGuesses = 0;
         var incorrectGuesses = 0;
-        var outcome = "";
+        var outcome = "incorrect";
         var availLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","Enter"];
         var usedLetters = [];
         document.getElementById("wordArea").innerHTML = "";
@@ -129,13 +129,27 @@ window.onload = function () {
             targetWord.appendChild(newSpace);
         };
 
-        document.onkeyup = function(event) {
-            var avail = availLetters.includes(event.key);
-            var used = usedLetters.includes(event.key);
+        document.removeEventListener("click", runScript);
+        document.addEventListener("click", (e) => detectKey(e));
+
+        var detectKey = function(e) {
+            var type=e.target.className;
+            var keyId=e.target.id;
+            if(type==="letter") {
+                turnTaken(keyId)
+            }
+        };
+
+        document.onkeyup = function(e) {
+            turnTaken(e.key);
+        };
+
+        var turnTaken = function(key) {
+            var avail = availLetters.includes(key);
+            var used = usedLetters.includes(key);
 
             if (avail === true && used === false) {
                 for (var len = 0; len < randomDino.name.length; len++) {
-                    var key = event.key
                     var found = document.getElementById(len);
                     if (found.className === key){
                         found.textContent = " " + key + " ";
@@ -156,7 +170,7 @@ window.onload = function () {
                 if (correctGuesses === randomDino.name.length) {
                     document.getElementById("letterArea").style.display = "none";
                     document.getElementById("hangmanArea").style.display = "none";
-                    document.getElementById("winLossArea").textContent = "You Win! (press enter to play again)";
+                    document.getElementById("winLossArea").textContent = "You Win! (tap/click or press enter to play again)";
                     document.getElementById("pictureArea").appendChild(dinoPic);
                     document.getElementById("factArea").textContent = randomDino.description;
                     winCount++;
@@ -168,8 +182,10 @@ window.onload = function () {
                     document.getElementById("DinoIntro").pause();
                     document.getElementById("DinoLoss").pause();
                     document.getElementById("DinoWin").play();
-                    document.onkeyup = function(event) {
-                        if (event.keyCode === 13) {
+                    document.removeEventListener("click", detectKey);
+                    document.addEventListener("click", runScript)
+                    document.onkeyup = function(e) {
+                        if (e.keyCode === 13) {
                             runScript();
                         };
                     };
@@ -178,7 +194,7 @@ window.onload = function () {
                 if (incorrectGuesses === 8) {
                     document.getElementById("letterArea").style.display = "none";
                     document.getElementById("hangmanArea").style.display = "none";
-                    document.getElementById("winLossArea").textContent = "You Lose! (press enter to play again)";
+                    document.getElementById("winLossArea").textContent = "You Lose! (tap/click or press enter to play again)";
                     lossCount++;
                     usedLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
                     document.getElementById("DinoWin").load();
@@ -188,6 +204,8 @@ window.onload = function () {
                     document.getElementById("DinoIntro").pause();
                     document.getElementById("DinoLoss").pause();
                     document.getElementById("DinoLoss").play();
+                    document.removeEventListener("click", detectKey);
+                    document.addEventListener("click", runScript);
                     document.onkeyup = function(event) {
                         if (event.keyCode === 13) {
                             runScript();
@@ -201,11 +219,8 @@ window.onload = function () {
             };
         };
     };
-       
-    document.onkeyup = function(event) {
-            runScript();
+    document.addEventListener("click", runScript);
+    document.onkeyup = function() {
+        runScript();
     };
 };
-
-// Find a way to cut function and reset things at win or loss.
-// Creat song triggers.
