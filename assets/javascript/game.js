@@ -97,6 +97,7 @@ window.onload = function () {
         document.getElementById("factArea").innerHTML = "";
         document.getElementById("winLossArea").innerHTML = "";
         document.getElementById("pressAny").style.display = "none";
+        document.getElementById("tapHere").style.display = "none";
         document.getElementById("hangmanArea").style.display = "block"
         document.getElementById("letterArea").style.display = "block";
         var revertLetters = document.getElementsByClassName("letter");
